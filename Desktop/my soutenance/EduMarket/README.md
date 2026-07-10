@@ -1,202 +1,289 @@
-# EduMarket
+<div align="center">
+  <h1>📚 EduMarket</h1>
+  <p><strong>Plateforme e-commerce éducative — Laravel 13 + Bootstrap 5</strong></p>
+  <p>
+    <img src="https://img.shields.io/badge/Laravel-13.8-FF2D20?style=flat-square&logo=laravel" alt="Laravel">
+    <img src="https://img.shields.io/badge/PHP-^8.3-777BB4?style=flat-square&logo=php" alt="PHP">
+    <img src="https://img.shields.io/badge/Bootstrap-5-7952B3?style=flat-square&logo=bootstrap" alt="Bootstrap">
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql" alt="MySQL">
+    <img src="https://img.shields.io/badge/Locale-Français-0055A4?style=flat-square" alt="Locale">
+  </p>
+  <p>
+    <a href="#features">Fonctionnalités</a> •
+    <a href="#quick-start">Installation</a> •
+    <a href="#architecture">Architecture</a> •
+    <a href="#admin-panel">Administration</a> •
+    <a href="#screenshots">Captures d'écran</a>
+  </p>
+</div>
 
-**EduMarket** is an educational e-commerce platform built with Laravel 13, designed for digital and educational products. It features a customer-facing store, a full shopping cart and checkout system, customer and admin dashboards, and complete back-office CRUD management for products, categories, and orders.
+---
 
-## Stack
+**EduMarket** est une plateforme e-commerce spécialisée dans la vente de fournitures scolaires, livres, calculatrices, matériel pédagogique et produits éducatifs. Développée avec Laravel 13 et Bootstrap 5, elle offre une expérience utilisateur complète avec un catalogue de 100+ produits répartis en 12 catégories, un panier session-based, un checkout sécurisé, et une interface d'administration complète.
 
-| Layer       | Technology |
-|-------------|------------|
-| Backend     | Laravel 13.8.0 (PHP ^8.3) |
-| Frontend    | Blade + Bootstrap 5 + Chart.js |
-| Assets      | Vite + Laravel Breeze |
-| Database    | MySQL (configurable via `.env`) |
-| Auth        | Laravel Breeze (Blade stack) |
-| Locale      | French (`fr`) |
+---
 
-## Folder Architecture
+## ✨ Fonctionnalités
+
+### 🛍️ Côté Client
+| Module | Détails |
+|--------|---------|
+| **Boutique** | Catalogue avec filtres (catégorie, prix, recherche, stock) |
+| **Fiche produit** | Image, description, prix, stock, quantité, produits similaires |
+| **Catégories** | Listing complet avec nombre de produits |
+| **Panier** | Session-based (invité + connecté), mise à jour AJAX, badge navbar |
+| **Checkout** | Formulaire de commande avec nom, téléphone, ville, adresse |
+| **Commandes** | Historique avec statuts et détails |
+| **Pages** | Accueil, À propos, Contact |
+
+### 🔧 Administration
+| Module | Détails |
+|--------|---------|
+| **Tableau de bord** | Statistiques (produits, catégories, clients, commandes), revenus mensuels, graphique Chart.js, produits les plus vendus, stock faible |
+| **Produits** | CRUD complet avec upload image (JPEG/PNG/WebP), génération automatique de slug, filtres |
+| **Catégories** | CRUD avec slug auto, suppression bloquée si produits liés |
+| **Commandes** | Liste avec recherche et filtres (statut, dates), détail client + produits, mise à jour statut, facture imprimable |
+
+### 🛡️ Sécurité
+- Authentification Laravel Breeze (Blade stack)
+- Middleware `AdminMiddleware` avec guard `admin` (403)
+- Validation des types de fichiers image
+- Protection contre les doublons de commande (fenêtre 5 min)
+- Transactions SQL pour la déduction de stock
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# 1. Cloner le projet
+git clone <url-du-repo> edumarket
+cd edumarket
+
+# 2. Configuration de l'environnement
+copy .env.example .env
+# Éditer .env : DB_DATABASE, DB_USERNAME, DB_PASSWORD
+
+# 3. Dépendances
+composer install
+npm install
+
+# 4. Générer la clé
+php artisan key:generate
+
+# 5. Base de données
+php artisan migrate --seed
+
+# 6. Assets
+npm run build
+
+# 7. Lancer le serveur
+php artisan serve
+
+# 8. Ouvrir dans le navigateur
+# http://localhost:8000
+```
+
+### Identifiants de test
+
+| Rôle | Email | Mot de passe |
+|------|-------|-------------|
+| **Admin** | `admin@edumarket.com` | `password` |
+| **Client** | `client@edumarket.com` | `password` |
+
+---
+
+## 🏗️ Architecture
 
 ```
 EduMarket/
 ├── app/
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── Admin/
-│   │   │   │   ├── AdminController.php        # Admin dashboard
-│   │   │   │   ├── CategoryController.php     # Category CRUD
-│   │   │   │   ├── OrderController.php        # Order management + invoice
-│   │   │   │   └── ProductController.php      # Product CRUD with image
-│   │   │   ├── CartController.php             # Session-based cart
-│   │   │   ├── CategoryController.php         # Public category listing
-│   │   │   ├── CheckoutController.php         # Checkout flow
-│   │   │   ├── DashboardController.php        # Customer dashboard
-│   │   │   ├── OrderController.php            # Customer order history
-│   │   │   ├── PageController.php             # Home, About, Contact
-│   │   │   ├── ProductController.php          # Shop listing + detail
-│   │   │   └── ProfileController.php          # Breeze profile
+│   │   │   ├── Admin/       # Dashboard, Catégories, Produits, Commandes
+│   │   │   ├── Auth/        # Breeze authentication
+│   │   │   ├── Cart/        # Panier session-based
+│   │   │   ├── Checkout/    # Commande + confirmation
+│   │   │   ├── Order/       # Historique client
+│   │   │   ├── Product/     # Catalogue + détail
+│   │   │   └── Page/        # Accueil, À propos, Contact
 │   │   └── Middleware/
-│   │       └── AdminMiddleware.php            # Admin guard (403)
-│   ├── Models/
-│   │   ├── Category.php                       # Has many products
-│   │   ├── Order.php                          # Belongs to user, has items
-│   │   ├── OrderItem.php                      # Belongs to order + product
-│   │   ├── Product.php                        # Belongs to category
-│   │   └── User.php                           # is_admin flag, has orders
-│   └── Services/
-│       └── CartService.php                    # Cart logic (session)
+│   │       └── AdminMiddleware.php
+│   ├── Models/               # User, Category, Product, Order, OrderItem
+│   ├── Services/
+│   │   └── CartService.php   # Logique métier du panier
+│   └── View/Components/      # Layouts App, Guest, Admin, Customer
 ├── database/
-│   ├── factories/                             # Model factories
-│   ├── migrations/                            # Schema definitions
-│   └── seeders/
-│       └── DatabaseSeeder.php                 # Seeds admin + 19 users + 12 categories + 100 products + 30 orders
+│   ├── factories/            # ProductFactory (100+ templates réels)
+│   ├── migrations/           # 7 migrations
+│   └── seeders/              # Admin + 19 users + 12 catégories + 100 produits
 ├── resources/views/
-│   ├── admin/                                 # Admin views
-│   │   ├── categories/                        # Index, create, edit, form
-│   │   ├── dashboard/                         # Stats, charts, tables
-│   │   ├── orders/                            # Index, show, invoice
-│   │   └── products/                          # Index, create, edit, form
-│   ├── cart/                                  # Cart page
-│   ├── checkout/                              # Checkout form + confirmation
-│   ├── components/                            # Blade components
-│   ├── dashboard/                             # Customer dashboard
-│   ├── layouts/                               # app, admin, customer-nav, guest
-│   ├── orders/                                # Customer order list + detail
-│   ├── profile/                               # Breeze profile pages
-│   ├── shop/                                  # Product listing + detail
-│   └── vendor/                                # Pagination overrides
+│   ├── admin/                # Dashboard, CRUD produits/catégories/commandes
+│   ├── shop/                 # Listing + détail produit
+│   ├── cart/                 # Panier
+│   ├── checkout/             # Formulaire + confirmation
+│   ├── components/           # 20+ composants Blade réutilisables
+│   └── layouts/              # 4 layouts (app, admin, guest, customer-nav)
 └── routes/
-    └── web.php                                # All routes
+    └── web.php               # Toutes les routes
 ```
 
-## Database Schema
+### Schéma de la base de données
 
 ```
-users
-├── id, name, email, password, is_admin (boolean), timestamps
-└── has many → orders
-
-categories
-├── id, name, slug, description, timestamps
-└── has many → products
-
-products
-├── id, name, slug, description, price, stock, image, category_id (FK), timestamps
-└── belongs to → category
-
-orders
-├── id, user_id (FK), order_number (unique), total, status (enum: pending|processing|completed|cancelled), full_name, city, notes, timestamps
-└── belongs to → user
-    └── has many → order_items
-
-order_items
-├── id, order_id (FK), product_id (FK), price, quantity, subtotal, timestamps
-└── belongs to → order, product
+┌─────────────┐       ┌──────────────┐
+│    users    │       │  categories  │
+├─────────────┤       ├──────────────┤
+│ id          │       │ id           │
+│ name        │       │ name         │
+│ email       │       │ slug         │
+│ password    │       │ description  │
+│ is_admin    │       │ timestamps   │
+│ timestamps  │       └──────┬───────┘
+└──────┬──────┘              │
+       │                     │ has many
+       │ has many            │
+       │              ┌──────▼───────┐
+       │              │   products   │
+       │              ├──────────────┤
+       │              │ id           │
+       │              │ title        │
+       │              │ slug         │
+       │              │ description  │
+       │              │ price        │
+       │              │ stock        │
+       │              │ image        │
+       │              │ category_id  │◄────────┘
+       │              │ status       │
+       │              │ timestamps   │
+       │              └──────┬───────┘
+       │                     │
+       │                     │ has many
+       │              ┌──────▼──────────┐
+       │              │   order_items   │
+       │              ├─────────────────┤
+       │              │ id              │
+       │              │ order_id        │
+       │              │ product_id      │◄────────┘
+       │              │ price           │
+       │              │ quantity        │
+       │              │ subtotal        │
+       │              │ timestamps      │
+       │              └──────┬──────────┘
+       │                     │
+       │              ┌──────▼──────────┐
+       └──────────────┤     orders     │
+                      ├────────────────┤
+                      │ id             │
+                      │ user_id        │◄────────┘
+                      │ order_number   │
+                      │ total          │
+                      │ status         │
+                      │ full_name      │
+                      │ phone          │
+                      │ city           │
+                      │ shipping_addr  │
+                      │ notes          │
+                      │ timestamps     │
+                      └────────────────┘
 ```
 
-## Installation
+---
 
-1. **Clone the project:**
-   ```bash
-   git clone <repository-url> edumarket
-   cd edumarket
-   ```
+## 🧪 Catalogue Produits
 
-2. **Set up environment:**
-   ```bash
-   copy .env.example .env
-   ```
-   Edit `.env` and configure your database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+100 produits réels répartis en 12 catégories :
 
-3. **Install dependencies:**
-   ```bash
-   composer install
-   npm install
-   ```
+| Catégorie | Produits |
+|-----------|----------|
+| 📖 Livres | Manuels scolaires, dictionnaires, Bescherelle, Atlas |
+| 🎓 Manuels Universitaires | Économie, Droit, Médecine, Informatique, Marketing |
+| ✏️ Fournitures Scolaires | Stylos, cahiers, classeurs, trousses, crayons |
+| 🧮 Calculatrices | Casio, Texas, NumWorks, HP — scientifique à graphique |
+| 🎨 Outils de Dessin | Crayons aquarelle, pastels, Posca, toiles, pinceaux |
+| 🔬 Kits Pédagogiques | Robotique, chimie, microscope, télescope, Arduino |
+| 📄 Papeterie | Ramettes, enveloppes, blocs, carnets, chemises |
+| 🏫 Matériel de Classe | Tableaux, horloges, pupitres, affichages |
+| ⚗️ Sciences & Expériences | Microscope, télescope, kits chimie, ADN, météo |
+| 🌐 Langues Étrangères | Assimil (anglais, espagnol, allemand), dictionnaires |
+| 💻 Informatique | PC portable, claviers, souris, USB, routeurs |
+| 🖌️ Arts Créatifs | Acrylique, gouache, pâte à modeler, origami, mosaïque |
 
-4. **Generate application key:**
-   ```bash
-   php artisan key:generate
-   ```
+---
 
-5. **Run migrations and seeders:**
-   ```bash
-   php artisan migrate --seed
-   ```
+## 🛠️ Stack Technique
 
-6. **Build frontend assets:**
-   ```bash
-   npm run build
-   ```
+| Domaine | Technologie |
+|---------|-------------|
+| **Backend** | Laravel 13.8 (PHP ^8.3) |
+| **Frontend** | Blade, Bootstrap 5, Chart.js, Bootstrap Icons |
+| **Build** | Vite, PostCSS, Laravel Breeze |
+| **Base de données** | MySQL (configurable via `.env`) |
+| **Authentification** | Laravel Breeze Blade stack |
+| **Locale** | Français — traduction complète (`lang/fr/`) |
+| **Stockage images** | `storage/app/public/products/` + URLs distantes |
 
-7. **Start the development server:**
-   ```bash
-   php artisan serve
-   # In another terminal (optional):
-   npm run dev
-   ```
+---
 
-8. **Access the application:**
-   - Site: http://localhost:8000
-   - Admin credentials: `admin@edumarket.com` / `password`
-   - Customer credentials: `client@edumarket.com` / `password`
+## 📦 API & Points d'entrée
 
-## Features
+### Routes principales
 
-### Public
-- Home page, About, Contact form
-- Product shop with filtering (category, search, price range, in-stock)
-- Product detail page with image
-- Category listing
+| Méthode | URI | Description |
+|---------|-----|-------------|
+| `GET` | `/` | Accueil |
+| `GET` | `/shop` | Catalogue avec filtres |
+| `GET` | `/shop/{slug}` | Détail produit |
+| `GET/POST` | `/cart` | Panier |
+| `GET/POST` | `/checkout` | Commande |
+| `GET` | `/orders` | Historique client |
+| `GET/POST` | `/admin/dashboard` | Admin |
+| `GET/POST` | `/admin/products` | CRUD produits |
+| `GET/POST` | `/admin/categories` | CRUD catégories |
+| `GET/POST` | `/admin/orders` | Gestion commandes |
+| `GET` | `/admin/orders/{id}/invoice` | Facture imprimable |
 
-### Cart
-- Session-based cart (works for guests and authenticated users)
-- Add/update/remove items with stock validation
-- Quantity adjustment via AJAX
-- Cart badge in navigation
+---
 
-### Checkout
-- Order form with name, city, notes
-- Duplicate order prevention (5-minute window)
-- Stock deduction within database transaction
-- Order confirmation page
+## 📋 Prérequis
 
-### Customer Dashboard
-- Stats cards: total orders, pending, processing, completed, cancelled
-- Recent 5 orders table with status badges
-- Profile card with avatar initial + member date
+- **PHP** ^8.3
+- **Composer** 2.x
+- **MySQL** 8.0+
+- **Node.js** 18+ (pour Vite)
+- Extensions PHP requises : `BCMath`, `Ctype`, `Fileinfo`, `JSON`, `Mbstring`, `OpenSSL`, `PDO`, `Tokenizer`, `XML`
 
-### Admin Panel
-- **Dashboard:** products, categories, customers, orders counts; revenue; 5 recent orders; low-stock products; Chart.js bar chart (monthly revenue + orders over 12 months); most-sold products table (top 10)
-- **Products CRUD:** list with search/filter/paginate + stock badge, create/edit with image upload, slug auto-generation, image remove
-- **Categories CRUD:** list with product count, create/edit with auto-slug, delete blocked if products exist
-- **Orders management:** list with search/filter by status and date range, detail with customer info + purchased products, status update, printable invoice via `@media print`
-- **Responsive sidebar:** collapsible on mobile via Bootstrap collapse
+---
 
-### Technical
-- Admin middleware (`auth` + `admin` guard with 403 on failure)
-- French locale throughout
-- Bootstrap 5 pagination via `AppServiceProvider`
-- Image storage in `storage/app/public/products/`
-- Order number auto-generation (`EDU-YYYYMMDD-XXXX`)
-- Monthly sales aggregation via MySQL `DATE_FORMAT`
+## ⚠️ Limitations
 
-## Known Limitations
+- PHP 8.3+ requis (non compatible 8.2)
+- Pas de passerelle de paiement intégrée
+- Pas de notifications email
+- Pas de système de notation / avis
+- Français uniquement
+- Pas de suite de tests automatisés
 
-- PHP 8.3+ is required; the project cannot run with PHP 8.2 or below
-- No automated tests are implemented
-- Product images are stored locally; no CDN integration
-- No email notifications (order confirmation, status changes)
-- No payment gateway integration (orders are manual-tracked)
-- No multi-language support (French only)
+---
 
-## Future Improvements
+## 🔮 Évolutions possibles
 
-- Payment gateway integration (Stripe, PayPal)
-- Email notifications (order confirmation, shipping updates)
-- Product reviews and ratings
-- Wishlist functionality
-- Coupon / discount system
-- PDF invoice download (beyond print-to-PDF)
-- Product image gallery (multiple images per product)
-- REST API for mobile or third-party access
-- Automated test suite (Pest / PHPUnit)
-- Docker / Sail configuration for easier setup
+- [ ] Intégration Stripe / PayPal
+- [ ] Notifications email (confirmation, expédition)
+- [ ] Avis et notes sur les produits
+- [ ] Liste de souhaits
+- [ ] Système de coupons et réductions
+- [ ] Facture PDF téléchargeable
+- [ ] Galerie multi-images par produit
+- [ ] API REST pour application mobile
+- [ ] Tests automatisés (Pest / PHPUnit)
+- [ ] Configuration Docker / Laravel Sail
+
+---
+
+<div align="center">
+  <p>
+    <strong>EduMarket</strong> — Projet de soutenance<br>
+    Développé avec Laravel 13 • Bootstrap 5 • MySQL
+  </p>
+</div>
