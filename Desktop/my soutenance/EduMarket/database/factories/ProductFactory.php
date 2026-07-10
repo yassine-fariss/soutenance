@@ -275,6 +275,186 @@ class ProductFactory extends Factory
             }
         }
 
+        if ($category === 'Manuels Universitaires') {
+            $uniImages = [
+                'Comptabilité Générale'          => 'images/products/universitaire/comptabilite-generale.jpg',
+                'Droit des Affaires'             => 'images/products/universitaire/droit-des-affaires.jpg',
+                'Algorithmique et Programmation' => 'images/products/universitaire/algorithmique-python.jpg',
+                'Introduction à l\'Économie'     => 'images/products/universitaire/introduction-economie.jpg',
+                'Droit Constitutionnel'          => 'images/products/universitaire/droit-constitutionnel.jpg',
+                'Psychologie Cognitive'          => 'images/products/universitaire/psychologie-cognitive.jpg',
+                'Marketing Fondamentaux'         => 'images/products/universitaire/marketing-fondamentaux.jpg',
+                'Statistiques pour Sciences'     => 'images/products/universitaire/statistiques-sociales.jpg',
+                'Biochimie Structurale'          => 'images/products/universitaire/biochimie-structurale.jpg',
+                'Gestion des Ressources'         => 'images/products/universitaire/gestion-rh.jpg',
+            ];
+            foreach ($uniImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Arts Créatifs') {
+            $artImages = [
+                'Peinture Acrylique'    => 'images/products/arts-creatifs/peinture-acrylique.jpg',
+                'Gouache'               => 'images/products/arts-creatifs/gouache-godets.jpg',
+                'Pâte à Modeler'        => 'images/products/arts-creatifs/pate-modeler.jpg',
+                'Coffret 50 Feutres'    => 'images/products/arts-creatifs/coffret-feutres.jpg',
+                'Bloc Aquarelle'        => 'images/products/arts-creatifs/bloc-aquarelle.jpg',
+                'Toile Coton'           => 'images/products/arts-creatifs/toile-coton.jpg',
+                'Kit Origami'           => 'images/products/arts-creatifs/kit-origami.jpg',
+                'Kit Mosaïque'          => 'images/products/arts-creatifs/kit-mosaique.jpg',
+            ];
+            foreach ($artImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Calculatrices') {
+            $calcImages = [
+                'Casio FX-92'       => 'images/products/calculatrices/casio-fx-92.jpg',
+                'Casio Graph 90'    => 'images/products/calculatrices/casio-graph-90e.jpg',
+                'Texas TI-30X'      => 'images/products/calculatrices/ti-30x-pro.jpg',
+                'NumWorks N0100'    => 'images/products/calculatrices/numworks-n0100.jpg',
+                'Bureau 12 Chiffres'=> 'images/products/calculatrices/calculatrice-bureau.jpg',
+                'HP 10bII'          => 'images/products/calculatrices/hp-10bii-plus.jpg',
+                'Poche 8 Chiffres'  => 'images/products/calculatrices/calculatrice-poche.jpg',
+            ];
+            foreach ($calcImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Kits Pédagogiques') {
+            $kitImages = [
+                'Kit Chimie - 50'               => 'images/products/kits-pedagogiques/kit-chimie-50.jpg',
+                'Kit Robotique Solaire'         => 'images/products/kits-pedagogiques/kit-robotique-solaire.jpg',
+                'Kit Robotique Programmable'    => 'images/products/kits-pedagogiques/mbot-robot.jpg',
+                'Kit Micro:bit'                 => 'images/products/kits-pedagogiques/microbit-v2-go.jpg',
+                'Kit Arduino'                   => 'images/products/kits-pedagogiques/arduino-starter.jpg',
+                'Kit Corps Humain'              => 'images/products/kits-pedagogiques/corps-humain.jpg',
+                'Squelette Humain'              => 'images/products/kits-pedagogiques/squelette-humain.jpg',
+                'Globe Terrestre'               => 'images/products/kits-pedagogiques/globe-terrestre.jpg',
+                'Microscope Optique'            => 'images/products/kits-pedagogiques/microscope-40x-1000x.jpg',
+                'Télescope Réfracteur'          => 'images/products/kits-pedagogiques/telescope-70mm.jpg',
+                'Balance Précision'             => 'images/products/kits-pedagogiques/balance-precision.jpg',
+                'Kit Énergie Renouvelable'      => 'images/products/kits-pedagogiques/kit-energie-renouvelable.jpg',
+            ];
+            foreach ($kitImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Langues Étrangères') {
+            $langImages = [
+                'Assimil Anglais Débutant'          => 'images/products/langues/assimil-anglais-debutant.jpg',
+                'Assimil Espagnol'                  => 'images/products/langues/assimil-espagnol.jpg',
+                'Assimil Allemand'                  => 'images/products/langues/assimil-allemand.jpg',
+                'Dictionnaire Larousse Anglais'     => 'images/products/langues/larousse-anglais.jpg',
+                'Dictionnaire Larousse Espagnol'    => 'images/products/langues/larousse-espagnol.jpg',
+                'Bescherelle Espagnol'              => 'images/products/langues/bescherelle-espagnol.jpg',
+                'Vocabulaire Anglais'               => 'images/products/langues/vocabulaire-anglais.jpg',
+                'Grammaire Anglaise'                => 'images/products/langues/grammaire-anglaise.jpg',
+            ];
+            foreach ($langImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Matériel de Classe') {
+            $classImages = [
+                'Tableau Velleda 120x90cm'      => 'images/products/materiel-classe/tableau-velleda-120x90.jpg',
+                'Tableau Velleda Mobile'        => 'images/products/materiel-classe/tableau-velleda-mobile.jpg',
+                'Ardoises Velleda'              => 'images/products/materiel-classe/ardoises-velleda.jpg',
+                'Feutres Tableau'               => 'images/products/materiel-classe/feutres-tableau.jpg',
+                'Effaceur Tableau'              => 'images/products/materiel-classe/effaceur-tableau.jpg',
+                'Horloge Murale'                => 'images/products/materiel-classe/horloge-pedagogique.jpg',
+                'Tableau Affichage Liège'       => 'images/products/materiel-classe/tableau-affichage-liege.jpg',
+                'Pupitre Professeur'            => 'images/products/materiel-classe/pupitre-professeur.jpg',
+                'Compteur Présence'             => 'images/products/materiel-classe/compteur-presence.jpg',
+                'Mallette Enseignant'           => 'images/products/materiel-classe/mallette-enseignant.jpg',
+            ];
+            foreach ($classImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Sciences et Expériences') {
+            $sciImages = [
+                'Microscope Optique'            => 'images/products/sciences/microscope-optique.jpg',
+                'Télescope 70mm/700mm'          => 'images/products/sciences/telescope-70mm-700mm.jpg',
+                'Kit Chimie Volcans'            => 'images/products/sciences/chimie-volcans.jpg',
+                'Kit Énergie Solaire'           => 'images/products/sciences/kit-energie-solaire.jpg',
+                'Loupe Binoculaire'             => 'images/products/sciences/loupe-binoculaire.jpg',
+                'Thermomètre Laboratoire'       => 'images/products/sciences/thermometre-laboratoire.jpg',
+                'Lames Microscope'              => 'images/products/sciences/lames-microscope.jpg',
+                'Kit ADN'                       => 'images/products/sciences/kit-adn-extraction.jpg',
+                'Station Météo'                 => 'images/products/sciences/station-meteo.jpg',
+            ];
+            foreach ($sciImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Informatique et Programmation') {
+            $infoImages = [
+                'Ordinateur Portable'   => 'images/products/informatique/pc-portable-etudiant.jpg',
+                'Clavier Mécanique'     => 'images/products/informatique/clavier-mecanique.jpg',
+                'Souris Gaming'         => 'images/products/informatique/souris-gaming.jpg',
+                'Casque Audio'          => 'images/products/informatique/casque-audio-usb.jpg',
+                'Webcam Full HD'        => 'images/products/informatique/webcam-full-hd.jpg',
+                'Clé USB'               => 'images/products/informatique/cle-usb-128go.jpg',
+                'Disque Dur Externe'    => 'images/products/informatique/ssd-externe-1to.jpg',
+                'Hub USB-C'             => 'images/products/informatique/hub-usb-c.jpg',
+                'Support PC Portable'   => 'images/products/informatique/support-pc-aluminium.jpg',
+                'Câble HDMI'            => 'images/products/informatique/cable-hdmi.jpg',
+                'Routeur WiFi'          => 'images/products/informatique/routeur-wifi-6.jpg',
+            ];
+            foreach ($infoImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
+        if ($category === 'Outils de Dessin') {
+            $drawImages = [
+                'Crayons de Couleur Artiste'    => 'images/products/outils-dessin/crayons-artiste.jpg',
+                'Crayons Aquarelle'             => 'images/products/outils-dessin/crayons-aquarelle.jpg',
+                'Bloc Dessin A3'                => 'images/products/outils-dessin/bloc-dessin-a3-180g.jpg',
+                'Bloc Aquarelle A4'             => 'images/products/outils-dessin/bloc-aquarelle-20f.jpg',
+                'Feutres Artistiques'           => 'images/products/outils-dessin/feutres-artistiques.jpg',
+                'Marqueurs Posca'               => 'images/products/outils-dessin/posca-marqueurs.jpg',
+                'Pastels Secs'                  => 'images/products/outils-dessin/pastels-secs.jpg',
+                'Pastels à l\'Huile'            => 'images/products/outils-dessin/pastels-huile.jpg',
+                'Gomme Mie de Pain'             => 'images/products/outils-dessin/gomme-mie-pain.jpg',
+                'Carnet Croquis'                => 'images/products/outils-dessin/carnet-croquis.jpg',
+                'Compas de Précision Grand'     => 'images/products/outils-dessin/compas-grand-modele.jpg',
+                'Règle 30cm'                    => 'images/products/outils-dessin/set-geometrie.jpg',
+                'Toile Peinture 40x50cm'        => 'images/products/outils-dessin/toile-peinture-40x50.jpg',
+                'Kit Peinture Acrylique'        => 'images/products/outils-dessin/peinture-acrylique.jpg',
+                'Kit Gouache'                   => 'images/products/outils-dessin/kit-gouache.jpg',
+            ];
+            foreach ($drawImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
         $colors = [
             'Livres'                    => '2563EB',
             'Manuels Universitaires'    => '1D4ED8',
