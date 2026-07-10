@@ -215,6 +215,45 @@ class ProductFactory extends Factory
             }
         }
 
+        if ($category === 'Fournitures Scolaires') {
+            $stationeryImages = [
+                'Stylos Bille Bleu'         => 'images/products/stationery/blue-pens.jpg',
+                'Stylos Bille Noir'         => 'images/products/stationery/black-pens.jpg',
+                'Stylos Bille Rouge'        => 'images/products/stationery/red-pens.jpg',
+                'Cahier 200 Pages'          => 'images/products/stationery/notebook-large.jpg',
+                'Cahier 96 Pages'           => 'images/products/stationery/notebook-96.jpg',
+                'Cahier Spirale'            => 'images/products/stationery/spiral-notebook.jpg',
+                'Classeur 4 Anneaux'        => 'images/products/stationery/binder.jpg',
+                'Dossiers Suspendus'        => 'images/products/stationery/hanging-folders.jpg',
+                'Marqueurs Fluorescents'    => 'images/products/stationery/highlighters.jpg',
+                'Correcteur Liquide'        => 'images/products/stationery/correction-fluid.jpg',
+                'Roller Correcteur'         => 'images/products/stationery/correction-tape.jpg',
+                'Agenda Scolaire'           => 'images/products/stationery/agenda.jpg',
+                'Feuilles Quadrillées'      => 'images/products/stationery/grid-paper.jpg',
+                'Feuilles Unies'            => 'images/products/stationery/lined-paper.jpg',
+                'Trousse Scolaire'          => 'images/products/stationery/pencil-case.jpg',
+                'Crayons à Papier HB'       => 'images/products/stationery/pencils-hb.jpg',
+                'Crayons de Couleur'        => 'images/products/stationery/color-pencils.jpg',
+                'Feutres Fins'              => 'images/products/stationery/fine-markers.jpg',
+                'Gomme Blanche'             => 'images/products/stationery/erasers.jpg',
+                'Taille-Crayon'             => 'images/products/stationery/sharpener.jpg',
+                'Règle Plate'               => 'images/products/stationery/ruler.jpg',
+                'Équerre 26cm'              => 'images/products/stationery/set-square.jpg',
+                'Compas de Précision'       => 'images/products/stationery/compass.jpg',
+                'Ciseaux Scolaires'         => 'images/products/stationery/scissors.jpg',
+                'Colle Bâton'               => 'images/products/stationery/glue-sticks.jpg',
+                'Colle Liquide'             => 'images/products/stationery/liquid-glue.jpg',
+                'Ramette A4'                => 'images/products/stationery/a4-paper.jpg',
+                'Sac à Dos Scolaire'        => 'images/products/stationery/backpack.jpg',
+                'Boîte 24 Feutres'          => 'images/products/stationery/fine-markers.jpg',
+            ];
+            foreach ($stationeryImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
         $colors = [
             'Livres'                    => '2563EB',
             'Manuels Universitaires'    => '1D4ED8',
