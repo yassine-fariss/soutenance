@@ -63,7 +63,7 @@
                                                     @if ($item->product?->image)
                                                         @php
                                                             $isExternal = filter_var($item->product->image, FILTER_VALIDATE_URL);
-                                                            $imgSrc = $isExternal ? $item->product->image : asset('storage/' . $item->product->image);
+                                                            $imgSrc = $isExternal ? $item->product->image : (str_starts_with($item->product->image, 'images/') ? asset($item->product->image) : asset('storage/' . $item->product->image));
                                                         @endphp
                                                         <img src="{{ $imgSrc }}" alt="{{ $item->product->title }}"
                                                              class="rounded" style="width: 40px; height: 40px; object-fit: cover;">

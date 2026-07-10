@@ -190,6 +190,31 @@ class ProductFactory extends Factory
 
     private static function img(string $text, string $category = ''): string
     {
+        if ($category === 'Livres') {
+            $livresImages = [
+                'Manuel de Mathématiques'   => 'images/products/books/math-book.jpg',
+                'Manuel de Français'        => 'images/products/books/manuel-francais.jpg',
+                'Physique-Chimie'           => 'images/products/books/physics-book.jpg',
+                'Guide SVT'                 => 'images/products/books/guide-svt.jpg',
+                'Bescherelle'               => 'images/products/books/bescherelle.jpg',
+                'Atlas Scolaire'            => 'images/products/books/atlas.jpg',
+                'Histoire-Géographie'       => 'images/products/books/histoire-geo.jpg',
+                'Allemand 1ère Année'       => 'images/products/books/allemand-cahier.jpg',
+                'Sésame'                    => 'images/products/books/math-book.jpg',
+                'Bled'                      => 'images/products/books/bled.jpg',
+                'Dictionnaire Le Robert'    => 'images/products/books/robert-poche.jpg',
+                'Larousse Junior'           => 'images/products/books/larousse-junior.jpg',
+                'Manuel de Philosophie'     => 'images/products/books/philosophie.jpg',
+                'Cahier de Vacances'        => 'images/products/books/cahier-vacances.jpg',
+                'Petit Larousse'            => 'images/products/books/petit-larousse.jpg',
+            ];
+            foreach ($livresImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
         $colors = [
             'Livres'                    => '2563EB',
             'Manuels Universitaires'    => '1D4ED8',

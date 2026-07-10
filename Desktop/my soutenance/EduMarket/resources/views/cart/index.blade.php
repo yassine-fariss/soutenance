@@ -53,8 +53,8 @@
                                             <td>
                                                 <div class="d-flex align-items-center gap-2">
                                                     @php
-                                                        $isExternal = filter_var($item['image'] ?? '', FILTER_VALIDATE_URL);
-                                                        $imgSrc = $isExternal ? $item['image'] : asset('storage/' . $item['image']);
+                                                    $isExternal = filter_var($item['image'] ?? '', FILTER_VALIDATE_URL);
+                                                    $imgSrc = $isExternal ? $item['image'] : (str_starts_with($item['image'] ?? '', 'images/') ? asset($item['image']) : asset('storage/' . $item['image']));
                                                     @endphp
                                                     @if ($item['image'])
                                                         <img src="{{ $imgSrc }}" alt="{{ $item['title'] }}"

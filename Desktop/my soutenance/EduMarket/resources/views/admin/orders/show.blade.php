@@ -122,7 +122,9 @@
                                             @php
                                                 $imgSrc = str_starts_with($item->product->image, 'http')
                                                     ? $item->product->image
-                                                    : asset('storage/' . $item->product->image);
+                                                    : (str_starts_with($item->product->image, 'images/')
+                                                        ? asset($item->product->image)
+                                                        : asset('storage/' . $item->product->image));
                                             @endphp
                                             <img src="{{ $imgSrc }}"
                                                  alt="" class="rounded"

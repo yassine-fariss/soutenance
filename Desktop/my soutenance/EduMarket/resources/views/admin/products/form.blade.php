@@ -111,7 +111,7 @@ document.getElementById('generate-slug')?.addEventListener('click', function () 
                     @if ($isEdit && $product->image)
                         @php $isExternal = filter_var($product->image, FILTER_VALIDATE_URL); @endphp
                         <div class="mb-3">
-                            <img src="{{ $isExternal ? $product->image : asset('storage/' . $product->image) }}"
+                            <img src="{{ $isExternal ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image)) }}"
                                  alt="{{ $product->title }}"
                                  class="img-fluid rounded mb-2"
                                  style="max-height: 180px; object-fit: cover;">

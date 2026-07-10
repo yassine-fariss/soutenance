@@ -72,7 +72,7 @@
                                     @if ($product->image)
                                         @php
                                             $isExternal = filter_var($product->image, FILTER_VALIDATE_URL);
-                                            $imageUrl = $isExternal ? $product->image : asset('storage/' . $product->image);
+                                            $imageUrl = $isExternal ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image));
                                         @endphp
                                         <img src="{{ $imageUrl }}"
                                              alt="{{ $product->title }}"

@@ -17,7 +17,7 @@
                         @if ($product->image)
                             @php
                                 $isExternal = filter_var($product->image, FILTER_VALIDATE_URL);
-                                $imgSrc = $isExternal ? $product->image : asset('storage/' . $product->image);
+                                $imgSrc = $isExternal ? $product->image : (str_starts_with($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image));
                             @endphp
                             <img src="{{ $imgSrc }}" alt="{{ $product->title }}" class="img-fluid p-4" style="max-height: 400px; object-fit: contain;">
                         @else
