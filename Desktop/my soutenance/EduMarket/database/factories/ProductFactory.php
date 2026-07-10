@@ -254,6 +254,27 @@ class ProductFactory extends Factory
             }
         }
 
+        if ($category === 'Papeterie') {
+            $officeImages = [
+                'Ramette A4'              => 'images/products/office/ramette-a4.jpg',
+                'Ramette A3'              => 'images/products/office/ramette-a3.jpg',
+                'Bloc-Notes Autocollants' => 'images/products/office/bloc-notes.jpg',
+                'Carnet Notes'            => 'images/products/office/carnet-notes.jpg',
+                'Cahier Réunion'          => 'images/products/office/cahier-reunion.jpg',
+                'Enveloppes Kraft'        => 'images/products/office/enveloppes-kraft.jpg',
+                'Enveloppes Blanches'     => 'images/products/office/enveloppes-blanches.jpg',
+                'Classeur 2 Anneaux'      => 'images/products/office/classeur-anneaux.jpg',
+                'Chemises Cartonnées'     => 'images/products/office/chemises-cartonnes.jpg',
+                'Intercalaires'           => 'images/products/office/intercalaires.jpg',
+                'Pochettes Perforées'     => 'images/products/office/pochettes-perforees.jpg',
+            ];
+            foreach ($officeImages as $key => $path) {
+                if (str_contains($text, $key)) {
+                    return $path;
+                }
+            }
+        }
+
         $colors = [
             'Livres'                    => '2563EB',
             'Manuels Universitaires'    => '1D4ED8',
